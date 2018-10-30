@@ -1,17 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { ContextProvider } from './context'
+import './App.css'
 import HelloWorld from './components/HelloWorld'
 
-class App extends Component {
-  render() {
-    return (
-      <ContextProvider>
-        <div className="App">
-          <HelloWorld />
-        </div>
-      </ContextProvider>
-    )
-  }
+const App = () => {
+  return (
+    <ContextProvider>
+      <div className="App"> </div>
+    </ContextProvider>
+  )
 }
 
 export default App
