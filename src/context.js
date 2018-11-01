@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import reducer from './reducer'
+import contextActions from './contextActions'
 
 const { Provider, Consumer } = React.createContext()
 
@@ -27,8 +28,12 @@ const defaultCards = {
 
 class ContextProvider extends Component {
   state = {
-    cards: [],
-    dispatch: action => this.setState(reducer(action))
+    cards: []
+    // dispatch: action => this.setState(reducer(action))
+  }
+  actions = {
+    dispatch: action => this.setState(reducer(action)),
+    ...contextActions
   }
 
   componentDidMount() {
@@ -47,7 +52,7 @@ class ContextProvider extends Component {
   }
 
   render() {
-    return <Provider value={this.state}>{this.props.children}</Provider>
+    return <Provider value={{ ...this.state, ...this.actions }}>{this.props.children}</Provider>
   }
 }
 
