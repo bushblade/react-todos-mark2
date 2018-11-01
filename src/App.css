@@ -9,6 +9,57 @@ body {
 }
 
 .App {
-  margin: 2rem;
+  margin: 2rem 10rem;
   display: flex;
+}
+
+.card {
+  border: 1px solid darkgrey;
+  border-radius: 0.5rem;
+  width: 30%;
+  box-shadow: -1px 3px 16px 2px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  border-bottom: 1px solid darkgrey;
+  padding: 0 0.3rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 3px rgba(10, 10, 10, 0.1);
+}
+
+.card-title {
+  display: block;
+  margin: 0;
+  padding: 0.4rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-right: auto;
+}
+.card-header i {
+  padding: 0.4rem;
+  cursor: pointer;
+}
+
+.card-body {
+  padding: 0.5rem;
+}
+
+.card-task {
+  display: flex;
+  align-items: center;
+}
+
+.card-task i {
+  padding: 0.4rem;
+  cursor: pointer;
+}
+
+.card-task-text {
+  margin: 0 auto 0 0;
+}
+
+.checked {
+  color: darkgrey;
+  text-decoration: line-through;
 }
