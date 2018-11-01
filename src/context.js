@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import reducer from './reducer'
 
 const { Provider, Consumer } = React.createContext()
 
@@ -24,44 +25,6 @@ const defaultCards = {
   ]
 }
 
-const reducer = ({ type, payload }) => {
-  switch (type) {
-    case 'DELETE_CARD':
-      return ({ cards }) => {
-        return { cards: cards.filter(({ cardId }) => cardId !== payload.id) }
-      }
-
-    case 'CHECK_TASK':
-      return ({ cards }) => {
-        let { card } = payload
-        card.tasks = card.tasks.map(task => {
-          return task.taskId === payload.taskId ? { ...task, checked: !task.checked } : task
-        })
-        return { cards: cards.map(c => (c.cardId === card.cardId ? card : c)) }
-      }
-
-    case 'DELETE_TASK':
-      return ({ cards }) => {
-        let { card } = payload
-        card.tasks = card.tasks.filter(task => {
-          return task.taskId !== payload.taskId
-        })
-        return { cards: cards.map(c => (c.cardId === card.cardId ? card : c)) }
-      }
-
-    case 'UPDATE_TASK':
-      return ({ cards }) => {
-        let { card } = payload
-        card.tasks = card.tasks.map(task => {
-          return task.taskId === payload.taskId ? { ...task, text: payload.textContent } : task
-        })
-        return { cards: cards.map(c => (c.cardId === card.cardId ? card : c)) }
-      }
-    default:
-      return ({ cards }) => cards
-  }
-}
-
 class ContextProvider extends Component {
   state = {
     cards: [],
@@ -70,17 +33,15 @@ class ContextProvider extends Component {
 
   componentDidMount() {
     if (localStorage.getItem('cards') !== null) {
-      console.log('cards in storage')
-      this.setState(JSON.parse(localStorage.getItem('cards')))
+      let fromStorage = JSON.parse(localStorage.getItem('cards'))
+      fromStorage.cards.length > 0 ? this.setState(fromStorage) : this.setState(defaultCards)
     } else {
       this.setState(defaultCards)
     }
   }
 
   componentDidUpdate() {
-    // console.log(this.state.cards)
     if (localStorage.getItem('cards') !== undefined) {
-      // console.log('updating storage')
       localStorage.setItem('cards', JSON.stringify({ cards: this.state.cards }))
     }
   }
