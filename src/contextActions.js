@@ -1,3 +1,5 @@
+import uuid from 'uuid'
+
 const taskReducer = card => ({ cards }) => {
   return { cards: cards.map(c => (c.cardId === card.cardId ? card : c)) }
 }
@@ -23,8 +25,18 @@ export default {
 
   UPDATE_TASK: ({ card, taskId, textContent }) => {
     card.tasks = card.tasks.map(task => {
-      return task.taskId === taskId ? { ...task, textContent } : task
+      return task.taskId === taskId ? { ...task, text: textContent } : task
     })
+    return taskReducer(card)
+  },
+
+  ADD_TASK: ({ card }) => {
+    const newTask = {
+      taskId: uuid(),
+      text: '',
+      checked: false
+    }
+    card.tasks = [...card.tasks, newTask]
     return taskReducer(card)
   }
 }

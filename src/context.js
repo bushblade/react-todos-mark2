@@ -1,23 +1,23 @@
 import React, { Component } from 'react'
-// import reducer from './reducer'
 import contextActions from './contextActions'
+import uuid from 'uuid'
 
 const { Provider, Consumer } = React.createContext()
 
 const defaultCards = {
   cards: [
     {
-      cardId: 1,
+      cardId: uuid(),
       title: 'default',
       color: 'WhiteSmoke',
       tasks: [
         {
-          taskId: 1,
+          taskId: uuid(),
           text: 'some thing to do',
           checked: false
         },
         {
-          taskId: 2,
+          taskId: uuid(),
           text: 'some thing else to do',
           checked: false
         }
@@ -28,12 +28,8 @@ const defaultCards = {
 
 class ContextProvider extends Component {
   state = {
-    cards: []
-    // dispatch: action => this.setState(reducer(action))
-  }
-  actions = {
-    dispatch: action => this.setState(action),
-    ...contextActions
+    cards: [],
+    dispatch: action => this.setState(action)
   }
 
   componentDidMount() {
@@ -52,7 +48,7 @@ class ContextProvider extends Component {
   }
 
   render() {
-    return <Provider value={{ ...this.state, ...this.actions }}>{this.props.children}</Provider>
+    return <Provider value={{ ...this.state, ...contextActions }}>{this.props.children}</Provider>
   }
 }
 

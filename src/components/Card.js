@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import CardHeader from './CardHeader'
 import CardTask from './CardTask'
+import AddTask from './AddTask'
 
 const Card = ({ card }) => {
   return (
@@ -12,6 +13,7 @@ const Card = ({ card }) => {
         {card.tasks.map(task => (
           <CardTask key={task.taskId} task={task} card={card} />
         ))}
+        <AddTask card={card} />
       </div>
     </div>
   )
