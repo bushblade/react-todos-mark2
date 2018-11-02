@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import reducer from './reducer'
+// import reducer from './reducer'
 import contextActions from './contextActions'
 
 const { Provider, Consumer } = React.createContext()
@@ -32,7 +32,7 @@ class ContextProvider extends Component {
     // dispatch: action => this.setState(reducer(action))
   }
   actions = {
-    dispatch: action => this.setState(reducer(action)),
+    dispatch: action => this.setState(action),
     ...contextActions
   }
 

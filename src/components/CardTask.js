@@ -4,13 +4,13 @@ import { Consumer } from '../context'
 const CardTask = ({ task: { taskId, text, checked }, card }) => {
   return (
     <Consumer>
-      {({ dispatch }) => {
+      {({ dispatch, CHECK_TASK, UPDATE_TASK, DELETE_TASK }) => {
         return (
           <div className="card-task">
             <i
               className={`far ${checked ? 'fa-check-square' : 'fa-square'}`}
               onClick={() => {
-                dispatch({ type: 'CHECK_TASK', payload: { card, taskId } })
+                dispatch(CHECK_TASK({ card, taskId }))
               }}
             />
             <p
@@ -18,14 +18,14 @@ const CardTask = ({ task: { taskId, text, checked }, card }) => {
               contentEditable
               suppressContentEditableWarning
               onBlur={({ target: { textContent } }) => {
-                dispatch({ type: 'UPDATE_TASK', payload: { card, taskId, textContent } })
+                dispatch(UPDATE_TASK({ card, taskId, textContent }))
               }}>
               {text}
             </p>
             <i
               className="fas fa-times"
               onClick={() => {
-                dispatch({ type: 'DELETE_TASK', payload: { card, taskId } })
+                dispatch(DELETE_TASK({ card, taskId }))
               }}
             />
           </div>

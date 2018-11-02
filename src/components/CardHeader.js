@@ -11,7 +11,7 @@ const CardHeader = ({ card }) => {
           <i
             className="fas fa-trash"
             onClick={() => {
-              dispatch({ type: 'DELETE_CARD', payload: { id: card.cardId } })
+              dispatch(DELETE_CARD({ id: card.cardId }))
             }}
           />
         </div>
