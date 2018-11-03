@@ -48,5 +48,17 @@ export default {
   CHANGE_COLOR: ({ card, color }) => {
     card.color = color
     return taskReducer(card)
+  },
+
+  ADD_CARD: () => {
+    const card = {
+      cardId: uuid(),
+      title: '',
+      color: 'WhiteSmoke',
+      tasks: []
+    }
+    return ({ cards }) => {
+      return { cards: [...cards, card] }
+    }
   }
 }
