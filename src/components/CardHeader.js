@@ -1,21 +1,25 @@
 import React from 'react'
 import { Consumer } from '../context'
+import CardTitle from './CardTitle'
 
 const CardHeader = ({ card }) => {
   return (
     <Consumer>
-      {({ dispatch, DELETE_CARD }) => (
-        <div className="card-header">
-          <p className="card-title">{card.title}</p>
-          <i className="fas fa-chevron-down" />
-          <i
-            className="fas fa-trash"
-            onClick={() => {
-              dispatch(DELETE_CARD({ id: card.cardId }))
-            }}
-          />
-        </div>
-      )}
+      {context => {
+        const { dispatch, DELETE_CARD, UPDATE_TITLE } = context
+        return (
+          <div className="card-header">
+            <CardTitle card={card} dispatch={dispatch} UPDATE_TITLE={UPDATE_TITLE} />
+            <i className="fas fa-chevron-down" />
+            <i
+              className="fas fa-trash"
+              onClick={() => {
+                dispatch(DELETE_CARD({ id: card.cardId }))
+              }}
+            />
+          </div>
+        )
+      }}
     </Consumer>
   )
 }

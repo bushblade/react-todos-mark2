@@ -38,5 +38,10 @@ export default {
     }
     card.tasks = [...card.tasks, newTask]
     return taskReducer(card)
+  },
+
+  UPDATE_TITLE: ({ card, textContent }) => {
+    card.title = textContent
+    return taskReducer(card)
   }
 }

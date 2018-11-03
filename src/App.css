@@ -39,6 +39,7 @@ body {
   font-size: 1.1rem;
   font-weight: bold;
   margin-right: auto;
+  width: 100%;
 }
 .card-header i {
   padding: 0.4rem;
