@@ -26,7 +26,7 @@ const defaultCards = {
   ]
 }
 
-class ContextProvider extends Component {
+class CardProvider extends Component {
   state = {
     cards: [],
     dispatch: action => this.setState(action)
@@ -52,4 +52,4 @@ class ContextProvider extends Component {
   }
 }
 
-export { ContextProvider, Consumer }
+export { CardProvider, Consumer }

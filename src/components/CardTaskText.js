@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 
 export default class CardTaskText extends Component {
+  componentDidMount() {
+    if (this.props.text.length === 0) {
+      this.refs[`task-text${this.props.taskId}`].focus()
+    }
+  }
+
   render() {
-    const { dispatch, UPDATE_TASK, taskId, text, checked, card } = this.props
+    const { dispatch, UPDATE_TASK, taskId, text, checked, card, ADD_TASK } = this.props
     return (
       <p
         className={`card-task-text ${checked ? 'checked' : ''}`}
@@ -11,15 +17,17 @@ export default class CardTaskText extends Component {
         ref={`task-text${taskId}`}
         onBlur={({ target: { textContent } }) => {
           dispatch(UPDATE_TASK({ card, taskId, textContent }))
-          taskText().classList.remove('selected')
+          this.refs[`task-text${taskId}`].classList.remove('selected')
         }}
-        onKeyDown={({ keyCode }) => {
-          if (keyCode === 13) {
-            taskText().blur()
+        onKeyDown={e => {
+          if (e.keyCode === 13) {
+            e.preventDefault()
+            this.refs[`task-text${taskId}`].blur()
+            dispatch(ADD_TASK({ card }))
           }
         }}
         onFocus={() => {
-          taskText().classList.add('selected')
+          this.refs[`task-text${taskId}`].classList.add('selected')
         }}>
         {text}
       </p>

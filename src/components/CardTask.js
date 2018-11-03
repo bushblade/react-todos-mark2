@@ -1,12 +1,11 @@
 import React from 'react'
 import { Consumer } from '../context'
+import CardTaskText from './CardTaskText'
 
 const CardTask = ({ task: { taskId, text, checked }, card }) => {
   return (
     <Consumer>
-      {({ dispatch, CHECK_TASK, UPDATE_TASK, DELETE_TASK }) => {
-        const docId = `task-text${taskId}`
-        const taskText = () => document.getElementById(docId)
+      {({ dispatch, CHECK_TASK, UPDATE_TASK, DELETE_TASK, ADD_TASK }) => {
         return (
           <div className="card-task">
             <i
@@ -16,25 +15,15 @@ const CardTask = ({ task: { taskId, text, checked }, card }) => {
               }}
             />
 
-            <p
-              className={`card-task-text ${checked ? 'checked' : ''}`}
-              contentEditable
-              suppressContentEditableWarning
-              id={docId}
-              onBlur={({ target: { textContent } }) => {
-                dispatch(UPDATE_TASK({ card, taskId, textContent }))
-                taskText().classList.remove('selected')
-              }}
-              onKeyDown={({ keyCode }) => {
-                if (keyCode === 13) {
-                  taskText().blur()
-                }
-              }}
-              onFocus={() => {
-                taskText().classList.add('selected')
-              }}>
-              {text}
-            </p>
+            <CardTaskText
+              taskId={taskId}
+              text={text}
+              checked={checked}
+              card={card}
+              dispatch={dispatch}
+              UPDATE_TASK={UPDATE_TASK}
+              ADD_TASK={ADD_TASK}
+            />
 
             <i
               className="fas fa-times"
