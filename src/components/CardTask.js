@@ -8,12 +8,13 @@ const CardTask = ({ task: { taskId, text, checked }, card }) => {
       {({ dispatch, CHECK_TASK, UPDATE_TASK, DELETE_TASK, ADD_TASK }) => {
         return (
           <div className="card-task">
-            <i
-              className={`far ${checked ? 'fa-check-square' : 'fa-square'}`}
+            <span
+              className="icon"
               onClick={() => {
                 dispatch(CHECK_TASK({ card, taskId }))
-              }}
-            />
+              }}>
+              <i className={`far ${checked ? 'fa-check-square' : 'fa-square'}`} />
+            </span>
 
             <CardTaskText
               taskId={taskId}
@@ -24,13 +25,13 @@ const CardTask = ({ task: { taskId, text, checked }, card }) => {
               UPDATE_TASK={UPDATE_TASK}
               ADD_TASK={ADD_TASK}
             />
-
-            <i
-              className="fas fa-times"
+            <span
+              className="icon"
               onClick={() => {
                 dispatch(DELETE_TASK({ card, taskId }))
-              }}
-            />
+              }}>
+              <i className="fas fa-times" />
+            </span>
           </div>
         )
       }}

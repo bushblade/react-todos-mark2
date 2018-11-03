@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 :focus {
@@ -10,6 +11,27 @@ html,
 body {
   margin: 0;
   padding: 0;
+}
+
+.icon {
+  margin: 0;
+  padding: 0;
+  width: 2rem;
+  height: 1.6rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.1s ease-in-out;
+}
+
+.icon:hover {
+  background: rgba(200, 200, 200, 0.6);
+}
+
+.icon i {
+  cursor: pointer;
 }
 
 .App {
@@ -41,9 +63,9 @@ body {
   margin-right: auto;
   width: 100%;
 }
-.card-header i {
-  padding: 0.4rem;
-  cursor: pointer;
+
+.card-title.selected {
+  font-style: italic;
 }
 
 .card-body {
@@ -55,17 +77,12 @@ body {
   align-items: center;
 }
 
-.card-task i {
-  padding: 0.4rem;
-  cursor: pointer;
-}
-
 .card-task-text {
   margin: 0 auto 0 0;
   width: 100%;
 }
 
-.selected {
+.card-task-text.selected {
   box-shadow: 0 2px 1px -2px gray;
 }
 
@@ -94,4 +111,5 @@ body {
 .add-task button:hover {
   color: white;
   background: black;
+  transition: all 0.2s ease-in-out;
 }

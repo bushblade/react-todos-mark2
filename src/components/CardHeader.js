@@ -10,13 +10,16 @@ const CardHeader = ({ card }) => {
         return (
           <div className="card-header">
             <CardTitle card={card} dispatch={dispatch} UPDATE_TITLE={UPDATE_TITLE} />
-            <i className="fas fa-chevron-down" />
-            <i
-              className="fas fa-trash"
+            <span className="icon">
+              <i className="fas fa-chevron-down" />
+            </span>
+            <span
+              className="icon"
               onClick={() => {
                 dispatch(DELETE_CARD({ id: card.cardId }))
-              }}
-            />
+              }}>
+              <i className="fas fa-trash" />
+            </span>
           </div>
         )
       }}
