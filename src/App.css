@@ -14,32 +14,46 @@ body {
 }
 
 .App {
-  margin: 2rem;
+  margin: 2rem auto;
+}
+
+.columns {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
 }
 
 .column {
   width: 100%;
-  margin: 0.5rem;
+  margin: 0;
+  padding: 0.75rem;
 }
 
-@media (min-width: 800px) {
+@media (min-width: 768px) {
   .App {
-    margin: 2rem;
+    margin: 2rem auto;
   }
   .column {
-    width: 40%;
+    width: 50%;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1000px) {
   .App {
-    margin: 2rem 10rem;
+    margin: 2rem auto;
+    max-width: 1000px;
   }
   .column {
-    width: 30%;
+    width: 33.333%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .App {
+    margin: 2rem auto;
+    max-width: 1300px;
+  }
+  .column {
+    width: 25%;
   }
 }
 
