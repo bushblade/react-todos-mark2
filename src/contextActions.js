@@ -55,7 +55,13 @@ export default {
       cardId: uuid(),
       title: '',
       color: 'WhiteSmoke',
-      tasks: []
+      tasks: [
+        {
+          taskId: uuid(),
+          text: '',
+          checked: false
+        }
+      ]
     }
     return ({ cards }) => {
       return { cards: [...cards, card] }

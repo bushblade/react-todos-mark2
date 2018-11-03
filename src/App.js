@@ -9,7 +9,9 @@ const App = () => {
   return (
     <CardProvider>
       <div className="App">
-        <Cards />
+        <div className="columns">
+          <Cards />
+        </div>
       </div>
     </CardProvider>
   )

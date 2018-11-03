@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class ColorPicker extends Component {
   state = {
     showMenu: false,
-    colors: ['Thistle', 'PaleTurquoise', 'LemonChiffon', 'NavajoWhite', 'GhostWhite']
+    colors: ['Thistle', 'PaleTurquoise', 'LemonChiffon', 'NavajoWhite', 'WhiteSmoke', 'LightGreen']
   }
 
   toggleMenu = () =>
