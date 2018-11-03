@@ -43,5 +43,10 @@ export default {
   UPDATE_TITLE: ({ card, textContent }) => {
     card.title = textContent
     return taskReducer(card)
+  },
+
+  CHANGE_COLOR: ({ card, color }) => {
+    card.color = color
+    return taskReducer(card)
   }
 }

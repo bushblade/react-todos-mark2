@@ -27,7 +27,7 @@ body {
 }
 
 .icon:hover {
-  background: rgba(200, 200, 200, 0.6);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .icon i {
@@ -87,7 +87,7 @@ body {
 }
 
 .checked {
-  color: darkgrey;
+  color: DimGray;
   text-decoration: line-through;
 }
 
@@ -123,11 +123,40 @@ body {
   top: 120%;
   right: 0;
   border: 1px solid darkgrey;
-  padding: 0.5rem;
+  padding: 0.2rem;
   border-radius: 0.5rem;
   box-shadow: -1px 3px 16px 2px rgba(0, 0, 0, 0.1);
 }
 
 .color-pick.active > .color-picker {
   display: block;
+}
+
+.color-picker-container {
+  display: flex;
+}
+
+.color-pick-icon-container {
+  margin: 0;
+  padding: 0;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.1s ease-in-out;
+}
+
+.color-pick-icon-container:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.color-pick-icon {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid black;
+  border-radius: 50%;
+  cursor: pointer;
 }

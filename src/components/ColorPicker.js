@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 
 export default class ColorPicker extends Component {
   state = {
-    showMenu: false
+    showMenu: false,
+    colors: ['Thistle', 'PaleTurquoise', 'LemonChiffon', 'NavajoWhite', 'GhostWhite']
   }
 
   toggleMenu = () =>
@@ -18,8 +19,10 @@ export default class ColorPicker extends Component {
   }
 
   render() {
-    const { card, context } = this.props
-    const { state: { showMenu }, toggleMenu, closeDropdown } = this // prettier-ignore
+    const {
+      card,
+      context: { dispatch, CHANGE_COLOR } } = this.props // prettier-ignore
+    const { state: { showMenu, colors }, toggleMenu, closeDropdown } = this // prettier-ignore
     return (
       <span
         className={`icon color-pick ${showMenu ? 'active' : ''}`}
@@ -29,7 +32,16 @@ export default class ColorPicker extends Component {
         }}>
         <i className="fas fa-chevron-down" />
         <div className="color-picker" style={{ backgroundColor: card.color }}>
-          some colours
+          <div className="color-picker-container">
+            {colors.map(color => (
+              <span
+                className="color-pick-icon-container"
+                key={color}
+                onClick={() => dispatch(CHANGE_COLOR({ card, color }))}>
+                <span className="color-pick-icon" style={{ backgroundColor: color }} />
+              </span>
+            ))}
+          </div>
         </div>
       </span>
     )
