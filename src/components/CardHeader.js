@@ -1,6 +1,7 @@
 import React from 'react'
 import { Consumer } from '../context'
 import CardTitle from './CardTitle'
+import ColorPicker from './ColorPicker'
 
 const CardHeader = ({ card }) => {
   return (
@@ -10,9 +11,7 @@ const CardHeader = ({ card }) => {
         return (
           <div className="card-header">
             <CardTitle card={card} dispatch={dispatch} UPDATE_TITLE={UPDATE_TITLE} />
-            <span className="icon">
-              <i className="fas fa-chevron-down" />
-            </span>
+            <ColorPicker card={card} context={context} />
             <span
               className="icon"
               onClick={() => {
