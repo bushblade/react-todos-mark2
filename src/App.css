@@ -133,23 +133,11 @@ body {
 .add-task {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding-top: 0.5rem;
+  justify-content: flex-start;
 }
 
-.add-task button {
-  width: 100%;
-  border: 1px solid black;
-  border-radius: 0.3rem;
-  padding: 0.3rem;
-  cursor: pointer;
-  color: black;
-  background: transparent;
-}
-
-.add-task button:hover {
-  background: rgba(0, 0, 0, 0.2);
-  transition: all 0.2s ease-in-out;
+.add-task > .icon {
+  height: 2rem;
 }
 
 .color-pick {

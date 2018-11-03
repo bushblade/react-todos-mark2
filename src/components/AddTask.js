@@ -5,7 +5,9 @@ const AddTask = ({ card }) => (
   <Consumer>
     {({ dispatch, ADD_TASK }) => (
       <div className="add-task">
-        <button onClick={() => dispatch(ADD_TASK({ card }))}>Add Task</button>
+        <span className="icon">
+          <i className="fas fa-plus" onClick={() => dispatch(ADD_TASK({ card }))} />
+        </span>
       </div>
     )}
   </Consumer>
