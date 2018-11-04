@@ -13,11 +13,12 @@ const CardHeader = ({ card }) => {
             <CardTitle card={card} dispatch={dispatch} UPDATE_TITLE={UPDATE_TITLE} />
             <ColorPicker card={card} context={context} />
             <span
-              className="icon"
+              className="icon has-tooltip"
               onClick={() => {
                 dispatch(DELETE_CARD({ id: card.cardId }))
               }}>
               <i className="fas fa-trash" />
+              <span className="tooltip">Delete card</span>
             </span>
           </div>
         )

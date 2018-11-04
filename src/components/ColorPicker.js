@@ -25,7 +25,7 @@ export default class ColorPicker extends Component {
     const { state: { showMenu, colors }, toggleMenu, closeDropdown } = this // prettier-ignore
     return (
       <span
-        className={`icon color-pick ${showMenu ? 'active' : ''}`}
+        className={`icon color-pick has-tooltip ${showMenu ? 'active' : ''}`}
         onClick={() => {
           toggleMenu()
           document.addEventListener('click', closeDropdown)
@@ -43,6 +43,7 @@ export default class ColorPicker extends Component {
             ))}
           </div>
         </div>
+        <span className="tooltip">Change Colour</span>
       </span>
     )
   }
