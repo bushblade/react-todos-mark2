@@ -27,7 +27,7 @@ export default {
     {
       cardId: uuid(),
       title: 'Cards are stored in local storage',
-      color: 'Thistle',
+      color: 'PaleTurquoise',
       tasks: [
         {
           taskId: uuid(),
@@ -37,6 +37,11 @@ export default {
         {
           taskId: uuid(),
           text: 'vanilla CSS - no framework',
+          checked: false
+        },
+        {
+          taskId: uuid(),
+          text: 'flexbox for responsive layout',
           checked: false
         },
         {
