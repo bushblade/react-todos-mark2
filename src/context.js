@@ -1,30 +1,8 @@
 import React, { Component } from 'react'
 import contextActions from './contextActions'
-import uuid from 'uuid'
+import defaultCards from './defaultCards'
 
 const { Provider, Consumer } = React.createContext()
-
-const defaultCards = {
-  cards: [
-    {
-      cardId: uuid(),
-      title: 'default',
-      color: 'WhiteSmoke',
-      tasks: [
-        {
-          taskId: uuid(),
-          text: 'some thing to do',
-          checked: false
-        },
-        {
-          taskId: uuid(),
-          text: 'some thing else to do',
-          checked: false
-        }
-      ]
-    }
-  ]
-}
 
 class CardProvider extends Component {
   state = {
