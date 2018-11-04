@@ -51,7 +51,7 @@ body {
 @media (min-width: 1400px) {
   .App {
     margin: 2rem auto;
-    max-width: 1300px;
+    max-width: 1500px;
   }
   .column {
     width: 25%;
