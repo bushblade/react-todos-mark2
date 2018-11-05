@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import actions from '../actions'
 
 export default class CardTitle extends Component {
   componentDidMount() {
@@ -9,7 +10,9 @@ export default class CardTitle extends Component {
   }
 
   render() {
-    const { dispatch, UPDATE_TITLE, card } = this.props
+    const { store, card } = this.props
+    const { dispatch } = this.props.store
+    const { UPDATE_TITLE } = actions
 
     return (
       <p

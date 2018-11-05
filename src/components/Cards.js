@@ -1,22 +1,17 @@
 import React from 'react'
-import { Consumer } from '../context'
+import actions from '../actions'
+
 import Card from './Card'
 import AddCard from './AddCard'
 
-const Cards = () => {
+const Cards = ({ store }) => {
   return (
-    <Consumer>
-      {({ cards, dispatch, ADD_CARD }) => {
-        return (
-          <>
-            {cards.map(card => (
-              <Card card={card} key={card.cardId} />
-            ))}
-            <AddCard dispatch={dispatch} ADD_CARD={ADD_CARD} />
-          </>
-        )
-      }}
-    </Consumer>
+    <>
+      {store.cards.map(card => (
+        <Card card={card} key={card.cardId} store={store} />
+      ))}
+      <AddCard store={store} />
+    </>
   )
 }
 

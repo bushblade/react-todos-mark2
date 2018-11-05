@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import contextActions from './contextActions'
+import contextActions from './actions'
 import defaultCards from './defaultCards'
 
 const { Provider, Consumer } = React.createContext()

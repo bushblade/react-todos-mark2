@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import actions from '../actions'
 
 export default class ColorPicker extends Component {
   state = {
@@ -19,10 +20,11 @@ export default class ColorPicker extends Component {
   }
 
   render() {
-    const {
-      card,
-      context: { dispatch, CHANGE_COLOR } } = this.props // prettier-ignore
+    const { card } = this.props
+    const { dispatch } = this.props.store
+    const { CHANGE_COLOR } = actions
     const { state: { showMenu, colors }, toggleMenu, closeDropdown } = this // prettier-ignore
+
     return (
       <span
         className={`icon color-pick has-tooltip ${showMenu ? 'active' : ''}`}

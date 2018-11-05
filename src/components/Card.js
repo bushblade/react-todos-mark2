@@ -1,30 +1,23 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import CardHeader from './CardHeader'
 import CardTask from './CardTask'
 import AddTask from './AddTask'
 
-const Card = ({ card }) => {
+const Card = ({ card, store }) => {
   return (
     <div className="column">
       <div className="card" style={{ backgroundColor: card.color }}>
-        <CardHeader card={card} />
+        <CardHeader card={card} store={store} />
         <div className="card-body">
           {card.tasks.map(task => (
-            <CardTask key={task.taskId} task={task} card={card} />
+            <CardTask store={store} key={task.taskId} task={task} card={card} />
           ))}
-          <AddTask card={card} />
+          <AddTask store={store} card={card} />
         </div>
       </div>
     </div>
   )
-}
-
-const { object } = PropTypes
-
-Card.propTypes = {
-  card: object.isRequired
 }
 
 export default Card
