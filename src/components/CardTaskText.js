@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
+import actions from '../actions'
 
 export default class CardTaskText extends Component {
   componentDidMount() {
-    if (this.props.text.length === 0) {
-      this.refs[`task-text${this.props.taskId}`].focus()
+    if (this.props.task.text.length === 0) {
+      this.refs[`task-text${this.props.task.taskId}`].focus()
     }
   }
 
   render() {
-    const { dispatch, UPDATE_TASK, taskId, text, checked, card, ADD_TASK } = this.props
+    const { store:{dispatch}, task: {checked, taskId, text }, card } = this.props // prettier-ignore
+    const { UPDATE_TASK, ADD_TASK } = actions
     return (
       <p
         className={`card-task-text ${checked ? 'checked' : ''}`}

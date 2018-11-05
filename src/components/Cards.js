@@ -1,5 +1,4 @@
 import React from 'react'
-import actions from '../actions'
 
 import Card from './Card'
 import AddCard from './AddCard'

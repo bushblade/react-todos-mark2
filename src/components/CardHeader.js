@@ -4,6 +4,8 @@ import ColorPicker from './ColorPicker'
 import actions from '../actions'
 
 const CardHeader = ({ card, store }) => {
+  const { dispatch } = store
+  const { DELETE_CARD } = actions
   return (
     <div className="card-header">
       <CardTitle card={card} store={store} />
@@ -11,7 +13,7 @@ const CardHeader = ({ card, store }) => {
       <span
         className="icon has-tooltip"
         onClick={() => {
-          store.dispatch(actions.DELETE_CARD({ id: card.cardId }))
+          dispatch(DELETE_CARD({ id: card.cardId }))
         }}>
         <i className="fas fa-trash" />
         <span className="tooltip">Delete card</span>

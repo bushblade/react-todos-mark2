@@ -10,8 +10,7 @@ export default class CardTitle extends Component {
   }
 
   render() {
-    const { store, card } = this.props
-    const { dispatch } = this.props.store
+    const { store:{ dispatch }, card } = this.props // prettier-ignore
     const { UPDATE_TITLE } = actions
 
     return (

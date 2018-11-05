@@ -1,8 +1,8 @@
 import React from 'react'
 import actions from '../actions'
 
-const AddCard = ({ store }) => (
-  <button className="add-card-btn" onClick={() => store.dispatch(actions.ADD_CARD())}>
+const AddCard = ({ store: { dispatch } }) => (
+  <button className="add-card-btn" onClick={() => dispatch(actions.ADD_CARD())}>
     Add Card
   </button>
 )
