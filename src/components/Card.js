@@ -1,4 +1,5 @@
 import React from 'react'
+import { Spring } from 'react-spring'
 
 import CardHeader from './CardHeader'
 import CardTask from './CardTask'
@@ -6,17 +7,21 @@ import AddTask from './AddTask'
 
 const Card = ({ card, store }) => {
   return (
-    <div className="column">
-      <div className="card" style={{ backgroundColor: card.color }}>
-        <CardHeader card={card} store={store} />
-        <div className="card-body">
-          {card.tasks.map(task => (
-            <CardTask store={store} key={task.taskId} task={task} card={card} />
-          ))}
-          <AddTask store={store} card={card} />
+    <Spring from={{ opacity: 0 }} to={{ opacity: 1 }}>
+      {props => (
+        <div className="column" style={props}>
+          <div className="card" style={{ backgroundColor: card.color }}>
+            <CardHeader card={card} store={store} />
+            <div className="card-body">
+              {card.tasks.map(task => (
+                <CardTask store={store} key={task.taskId} task={task} card={card} />
+              ))}
+              <AddTask store={store} card={card} />
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </Spring>
   )
 }
 
