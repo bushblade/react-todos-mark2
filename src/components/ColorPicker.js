@@ -1,5 +1,14 @@
 import React, { Component } from 'react'
+import posed, { PoseGroup } from 'react-pose'
+
 import actions from '../actions'
+
+import ColorMenu from './ColorMenu'
+
+const ColorPickerMenu = posed.div({
+  exit: { opacity: 0, scale: 0, y: 0, x: 0, transition: { duration: 200 } },
+  enter: { opacity: 1, scale: 1, y: 55, x: -50, transition: { duration: 200 } }
+})
 
 export default class ColorPicker extends Component {
   state = {
@@ -27,24 +36,28 @@ export default class ColorPicker extends Component {
 
     return (
       <span
-        className={`icon color-pick has-tooltip ${showMenu ? 'active' : ''}`}
+        className={'icon color-pick has-tooltip'}
         onClick={() => {
           toggleMenu()
           document.addEventListener('click', closeDropdown)
         }}>
         <i className="fas fa-chevron-down" />
-        <div className="color-picker" style={{ backgroundColor: card.color }}>
-          <div className="color-picker-container">
-            {colors.map(color => (
-              <span
-                className="color-pick-icon-container"
-                key={color}
-                onClick={() => dispatch(CHANGE_COLOR({ card, color }))}>
-                <span className="color-pick-icon" style={{ backgroundColor: color }} />
-              </span>
-            ))}
-          </div>
-        </div>
+        <PoseGroup>
+          {showMenu ? (
+            <ColorPickerMenu
+              className="color-picker"
+              style={{ backgroundColor: card.color }}
+              key={`colormenu${card.id}`}
+              animateOnMount={true}>
+              <ColorMenu
+                colors={colors}
+                card={card}
+                dispatch={dispatch}
+                CHANGE_COLOR={CHANGE_COLOR}
+              />
+            </ColorPickerMenu>
+          ) : null}
+        </PoseGroup>
         <span className="tooltip">Change Colour</span>
       </span>
     )
