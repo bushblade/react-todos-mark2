@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import posed, { PosedGroup } from 'react-pose'
+import posed, { PoseGroup } from 'react-pose'
 
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './App.css'
@@ -8,6 +8,14 @@ import defaultCards from './defaultCards'
 
 import Card from './components/Card'
 import AddCard from './components/AddCard'
+
+const Column = posed.div({
+  preenter: {
+    opacity: 0
+  },
+  enter: { opacity: 1, delay: ({ delay }) => delay * 100 },
+  exit: { opacity: 0 }
+})
 
 class App extends Component {
   state = {
@@ -33,9 +41,16 @@ class App extends Component {
     return (
       <div className="App">
         <div className="columns">
-          {cards.map(card => (
-            <Card card={card} key={card.cardId} store={this.state} />
-          ))}
+          <PoseGroup animateOnMount={true} preEnterPose={'preenter'}>
+            {cards.map((card, i) => {
+              const delay = card.title.length === 0 && card.tasks.length === 1 ? 0 : i
+              return (
+                <Column className="column" key={card.cardId} delay={delay}>
+                  <Card card={card} store={this.state} />
+                </Column>
+              )
+            })}
+          </PoseGroup>
           <AddCard store={this.state} />
         </div>
       </div>
