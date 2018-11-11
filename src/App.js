@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
+import posed, { PosedGroup } from 'react-pose'
+
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './App.css'
+
 import defaultCards from './defaultCards'
 
-import Cards from './components/Cards'
+import Card from './components/Card'
+import AddCard from './components/AddCard'
 
 class App extends Component {
   state = {
@@ -25,10 +29,14 @@ class App extends Component {
     }
   }
   render() {
+    const { cards } = this.state
     return (
       <div className="App">
         <div className="columns">
-          <Cards store={{ ...this.state }} />
+          {cards.map(card => (
+            <Card card={card} key={card.cardId} store={this.state} />
+          ))}
+          <AddCard store={this.state} />
         </div>
       </div>
     )
