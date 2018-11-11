@@ -6,8 +6,8 @@ import CardTask from './CardTask'
 import AddTask from './AddTask'
 
 const TaskBox = posed.div({
-  enter: { height: '100%', opacity: 1 },
-  exit: { height: 0, opacity: 0 }
+  enter: { height: '100%', opacity: 1, transition: { duration: 200 } },
+  exit: { height: 0, opacity: 0, transition: { duration: 200 } }
 })
 
 const Card = ({ card, store }) => {

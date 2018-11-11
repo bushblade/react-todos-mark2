@@ -68,7 +68,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .icon:hover {
@@ -146,8 +146,6 @@ body {
 }
 .color-pick > .color-picker {
   position: absolute;
-  /* top: 120%; */
-  /* right: 0; */
   border: 1px solid darkgrey;
   padding: 0.2rem;
   border-radius: 0.5rem;
@@ -170,7 +168,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 .color-pick-icon-container:hover {
