@@ -9,7 +9,7 @@ export default {
       tasks: [
         {
           taskId: uuid(),
-          text: 'Built using React Context API',
+          text: 'Built using functional setState',
           checked: false
         },
         {
@@ -59,6 +59,11 @@ export default {
         {
           taskId: uuid(),
           text: 'the trash can icon deletes a card',
+          checked: false
+        },
+        {
+          taskId: uuid(),
+          text: 'react-pose for animations',
           checked: false
         }
       ]
