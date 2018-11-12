@@ -7,11 +7,11 @@
   outline: none;
 }
 
-html,
 body {
   margin: 0;
-  padding: 0;
+  padding: 0 0 2rem 0;
   background: ghostwhite;
+  overflow-x: hidden;
 }
 
 .App {
@@ -184,10 +184,11 @@ body {
 }
 
 .add-card-btn {
+  z-index: 20;
   outline: none;
   position: fixed;
-  bottom: 3rem;
-  right: 3rem;
+  bottom: 1rem;
+  right: 1rem;
   padding: 0.5rem;
   border: 2px solid DarkSlateGray;
   color: DarkSlateGray;
@@ -198,6 +199,13 @@ body {
   font-size: 1.1rem;
   transition: all 0.2s ease-in-out;
   box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 1000px) {
+  .add-card-btn {
+    bottom: 3rem;
+    right: 3rem;
+  }
 }
 
 .add-card-btn:hover {
