@@ -44,7 +44,7 @@ body {
     max-width: 1100px;
   }
   .column {
-    width: 33.333%;
+    width: calc(100% / 3);
   }
 }
 
