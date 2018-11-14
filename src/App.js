@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './App.css'
+
 import defaultCards from './defaultCards'
 
 import Cards from './components/Cards'
