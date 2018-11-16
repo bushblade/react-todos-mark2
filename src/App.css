@@ -193,8 +193,8 @@ body {
 .add-card-btn {
   outline: none;
   position: fixed;
-  bottom: 3rem;
-  right: 3rem;
+  bottom: 1rem;
+  right: 1rem;
   padding: 0.5rem;
   border: 2px solid DarkSlateGray;
   color: DarkSlateGray;
