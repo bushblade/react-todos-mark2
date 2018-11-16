@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import actions from '../actions'
 
+import { Transition } from 'react-spring'
+
 export default class ColorPicker extends Component {
   state = {
     showMenu: false,
@@ -27,24 +29,36 @@ export default class ColorPicker extends Component {
 
     return (
       <span
-        className={`icon color-pick has-tooltip ${showMenu ? 'active' : ''}`}
+        className="icon color-pick has-tooltip"
         onClick={() => {
           toggleMenu()
           document.addEventListener('click', closeDropdown)
         }}>
         <i className="fas fa-chevron-down" />
-        <div className="color-picker" style={{ backgroundColor: card.color }}>
-          <div className="color-picker-container">
-            {colors.map(color => (
-              <span
-                className="color-pick-icon-container"
-                key={color}
-                onClick={() => dispatch(CHANGE_COLOR({ card, color }))}>
-                <span className="color-pick-icon" style={{ backgroundColor: color }} />
-              </span>
-            ))}
-          </div>
-        </div>
+        <Transition
+          items={showMenu}
+          from={{ opacity: 0, transform: 'scale(0)', right: '-120%', top: '-50%' }}
+          enter={{ opacity: 1, transform: 'scale(1)', right: '0', top: '120%' }}
+          leave={{ opacity: 0, transform: 'scale(0)', right: '-120%', top: '-50%' }}
+          config={{ duration: 200 }}>
+          {showMenu =>
+            showMenu &&
+            (props => (
+              <div className="color-picker" style={{ ...props, backgroundColor: card.color }}>
+                <div className="color-picker-container">
+                  {colors.map(color => (
+                    <span
+                      className="color-pick-icon-container"
+                      key={color}
+                      onClick={() => dispatch(CHANGE_COLOR({ card, color }))}>
+                      <span className="color-pick-icon" style={{ backgroundColor: color }} />
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))
+          }
+        </Transition>
         <span className="tooltip">Change Colour</span>
       </span>
     )
