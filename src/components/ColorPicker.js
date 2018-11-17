@@ -6,8 +6,20 @@ import actions from '../actions'
 import ColorMenu from './ColorMenu'
 
 const ColorPickerMenu = posed.div({
-  exit: { opacity: 0, scale: 0, y: 0, x: 0, transition: { duration: 200 } },
-  enter: { opacity: 1, scale: 1, y: 55, x: -50, transition: { duration: 200 } }
+  exit: {
+    opacity: 0,
+    scale: 0,
+    y: 15,
+    x: 0,
+    transition: { duration: 200, type: 'spring', stiffness: 200, damping: 10, mass: 0.2 }
+  },
+  enter: {
+    opacity: 1,
+    scale: 1,
+    y: 55,
+    x: -40,
+    transition: { duration: 200, type: 'spring', stiffness: 200, damping: 10, mass: 0.2 }
+  }
 })
 
 export default class ColorPicker extends Component {
@@ -22,7 +34,8 @@ export default class ColorPicker extends Component {
     })
 
   closeDropdown = e => {
-    if (!e.target.classList.contains('color-pick')) {
+    const { cardId } = this.props.card
+    if (!e.target.classList.contains(`color-menu-for${cardId}`)) {
       this.setState({ showMenu: false })
       document.removeEventListener('click', this.closeDropdown)
     }
