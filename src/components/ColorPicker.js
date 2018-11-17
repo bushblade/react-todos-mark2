@@ -15,7 +15,10 @@ export default class ColorPicker extends Component {
     })
 
   closeDropdown = e => {
-    if (!e.target.classList.contains('color-pick')) {
+    const {
+      card: { cardId }
+    } = this.props
+    if (!e.target.classList.contains(`picker-for${cardId}`)) {
       this.setState({ showMenu: false })
       document.removeEventListener('click', this.closeDropdown)
     }
@@ -44,7 +47,9 @@ export default class ColorPicker extends Component {
           {showMenu =>
             showMenu &&
             (props => (
-              <div className="color-picker" style={{ ...props, backgroundColor: card.color }}>
+              <div
+                className={`color-picker picker-for${card.cardId}`}
+                style={{ ...props, backgroundColor: card.color }}>
                 <div className="color-picker-container">
                   {colors.map(color => (
                     <span
