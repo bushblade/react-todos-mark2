@@ -178,9 +178,12 @@ body {
 .color-pick-icon {
   width: 1rem;
   height: 1rem;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   border-radius: 50%;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .add-card-btn {

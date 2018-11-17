@@ -8,7 +8,9 @@ const ColorMenu = ({ colors, card, dispatch, CHANGE_COLOR }) => {
           className="color-pick-icon-container"
           key={color}
           onClick={() => dispatch(CHANGE_COLOR({ card, color }))}>
-          <span className="color-pick-icon" style={{ backgroundColor: color }} />
+          <span className="color-pick-icon" style={{ backgroundColor: color }}>
+            <i className="far fa-circle" />
+          </span>
         </span>
       ))}
     </div>
