@@ -13,6 +13,7 @@ const Column = posed.div({
   preenter: {
     opacity: 0
   },
+  flip: { transition: { type: 'spring', stiffness: 250, damping: 18, mass: 0.6, delay: 200 } },
   enter: { opacity: 1, delay: ({ delay }) => delay * 100 },
   exit: { opacity: 0 }
 })
