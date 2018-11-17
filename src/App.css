@@ -146,8 +146,8 @@ body {
 }
 .color-pick > .color-picker {
   position: absolute;
-  /* top: 120%; */
-  /* right: 0; */
+  top: 0;
+  /* right: -150%; */
   border: 1px solid darkgrey;
   padding: 0.2rem;
   border-radius: 0.5rem;

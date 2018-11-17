@@ -37,9 +37,9 @@ export default class ColorPicker extends Component {
         <i className="fas fa-chevron-down" />
         <Transition
           items={showMenu}
-          from={{ opacity: 0, transform: 'scale(0)', right: '-120%', top: '-50%' }}
-          enter={{ opacity: 1, transform: 'scale(1)', right: '0', top: '120%' }}
-          leave={{ opacity: 0, transform: 'scale(0)', right: '-120%', top: '-50%' }}
+          from={{ opacity: 0, transform: 'scale(0) translate3d(-1rem,1.5rem,0)' }}
+          leave={{ opacity: 0, transform: 'scale(0) translate3d(-1rem,1.5rem,0)' }}
+          enter={{ opacity: 1, transform: 'scale(1) translate3d(-2.5rem,2rem,0)' }}
           config={{ duration: 200 }}>
           {showMenu =>
             showMenu &&
