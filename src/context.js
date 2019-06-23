@@ -1,11 +1,41 @@
-import React, { useEffect, useReducer, createContext } from 'react'
-import contextActions from './actions'
+import React, { useReducer, createContext } from 'react'
 import reducer from './reducer'
+
+import {
+  DELETE_CARD,
+  CHECK_TASK,
+  DELETE_TASK,
+  UPDATE_TASK,
+  ADD_TASK,
+  UPDATE_TITLE,
+  CHANGE_COLOR,
+  ADD_CARD
+} from './types'
 
 export const Context = createContext()
 
 const CardProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, [])
+
+  const [
+    deleteCard,
+    checkTask,
+    deleteTask,
+    updateTask,
+    addTask,
+    updateTitle,
+    changeColor,
+    addCard
+  ] = [
+    DELETE_CARD,
+    CHECK_TASK,
+    DELETE_TASK,
+    UPDATE_TASK,
+    ADD_TASK,
+    UPDATE_TITLE,
+    CHANGE_COLOR,
+    ADD_CARD
+  ].map(type => payload => dispatch({ type, payload }))
 
   // useEffect(() => {
   //   if (localStorage.getItem('cards') !== null) {
@@ -22,7 +52,23 @@ const CardProvider = ({ children }) => {
   //   }
   // }
 
-  return <Context.Provider value={{ cards: state, dispatch }}>{props.children}</Context.Provider>
+  return (
+    <Context.Provider
+      value={{
+        state,
+        deleteCard,
+        checkTask,
+        deleteTask,
+        updateTask,
+        addTask,
+        updateTitle,
+        changeColor,
+        addCard
+      }}
+    >
+      {children}
+    </Context.Provider>
+  )
 }
 
 export default CardProvider

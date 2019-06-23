@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Context } from '../context'
 
-const AddCard = ({ dispatch, ADD_CARD }) => (
-  <button className="add-card-btn" onClick={() => dispatch(ADD_CARD())}>
-    Add Card
-  </button>
-)
-
+const AddCard = () => {
+  const { addCard } = useContext(Context)
+  return (
+    <button className="add-card-btn" onClick={addCard}>
+      Add Card
+    </button>
+  )
+}
 export default AddCard

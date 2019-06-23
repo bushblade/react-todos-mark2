@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import CardHeader from './CardHeader'
 import CardTask from './CardTask'
@@ -19,12 +18,6 @@ const Card = ({ card }) => {
       </div>
     </div>
   )
-}
-
-const { object } = PropTypes
-
-Card.propTypes = {
-  card: object.isRequired
 }
 
 export default Card

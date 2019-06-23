@@ -1,50 +1,53 @@
-import React, { Component } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
+import { Context } from '../context'
 
-export default class ColorPicker extends Component {
-  state = {
-    showMenu: false,
-    colors: ['Thistle', 'PaleTurquoise', 'LemonChiffon', 'NavajoWhite', 'WhiteSmoke', 'LightGreen']
-  }
+export default ({ card }) => {
+  const { changeColor } = useContext(Context)
+  const [showMenu, setMenu] = useState(false)
+  const colors = [
+    'Thistle',
+    'PaleTurquoise',
+    'LemonChiffon',
+    'NavajoWhite',
+    'WhiteSmoke',
+    'LightGreen'
+  ]
 
-  toggleMenu = () =>
-    this.setState(({ showMenu }) => {
-      return { showMenu: !showMenu }
-    })
+  const toggleMenu = () => setMenu(!showMenu)
 
-  closeDropdown = e => {
+  const closeDropdown = e => {
     if (!e.target.classList.contains('color-pick')) {
-      this.setState({ showMenu: false })
-      document.removeEventListener('click', this.closeDropdown)
+      setMenu(false)
+      document.removeEventListener('click', closeDropdown)
     }
   }
 
-  render() {
-    const {
-      card,
-      context: { dispatch, CHANGE_COLOR } } = this.props // prettier-ignore
-    const { state: { showMenu, colors }, toggleMenu, closeDropdown } = this // prettier-ignore
-    return (
-      <span
-        className={`icon color-pick has-tooltip ${showMenu ? 'active' : ''}`}
-        onClick={() => {
-          toggleMenu()
-          document.addEventListener('click', closeDropdown)
-        }}>
-        <i className="fas fa-chevron-down" />
-        <div className="color-picker" style={{ backgroundColor: card.color }}>
-          <div className="color-picker-container">
-            {colors.map(color => (
-              <span
-                className="color-pick-icon-container"
-                key={color}
-                onClick={() => dispatch(CHANGE_COLOR({ card, color }))}>
-                <span className="color-pick-icon" style={{ backgroundColor: color }} />
-              </span>
-            ))}
-          </div>
+  useEffect(() => {
+    if (showMenu) {
+      document.addEventListener('click', closeDropdown)
+    }
+  }, [showMenu])
+
+  return (
+    <span
+      className={`icon color-pick has-tooltip ${showMenu ? 'active' : ''}`}
+      onClick={toggleMenu}
+    >
+      <i className="fas fa-chevron-down" />
+      <div className="color-picker" style={{ backgroundColor: card.color }}>
+        <div className="color-picker-container">
+          {colors.map(color => (
+            <span
+              className="color-pick-icon-container"
+              key={color}
+              onClick={() => changeColor({ cardId: card.cardId, newColor: color })}
+            >
+              <span className="color-pick-icon" style={{ backgroundColor: color }} />
+            </span>
+          ))}
         </div>
-        <span className="tooltip">Change Colour</span>
-      </span>
-    )
-  }
+      </div>
+      <span className="tooltip">Change Colour</span>
+    </span>
+  )
 }

@@ -1,22 +1,17 @@
-import React from 'react'
-import { Consumer } from '../context'
+import React, { useContext } from 'react'
+import { Context } from '../context'
 import Card from './Card'
 import AddCard from './AddCard'
 
 const Cards = () => {
+  const { state } = useContext(Context)
   return (
-    <Consumer>
-      {({ cards, dispatch, ADD_CARD }) => {
-        return (
-          <>
-            {cards.map(card => (
-              <Card card={card} key={card.cardId} />
-            ))}
-            <AddCard dispatch={dispatch} ADD_CARD={ADD_CARD} />
-          </>
-        )
-      }}
-    </Consumer>
+    <>
+      {state.map(card => (
+        <Card card={card} key={card.cardId} />
+      ))}
+      <AddCard />
+    </>
   )
 }
 

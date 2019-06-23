@@ -1,5 +1,5 @@
 import React from 'react'
-import { CardProvider } from './context'
+import CardProvider from './context'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 import './App.css'
 

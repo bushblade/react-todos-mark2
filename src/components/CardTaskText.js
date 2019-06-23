@@ -1,36 +1,37 @@
-import React, { Component } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { Context } from '../context'
 
-export default class CardTaskText extends Component {
-  componentDidMount() {
-    if (this.props.text.length === 0) {
-      this.refs[`task-text${this.props.taskId}`].focus()
+export default ({ taskId, text, checked, card }) => {
+  const [focused, setFocused] = useState(false)
+  const taskRef = useRef(taskId)
+  const { updateTask, addTask } = useContext(Context)
+
+  useEffect(() => {
+    if (text.length === 0) {
+      setFocused(true)
     }
-  }
+  }, [])
 
-  render() {
-    const { dispatch, UPDATE_TASK, taskId, text, checked, card, ADD_TASK } = this.props
-    return (
-      <p
-        className={`card-task-text ${checked ? 'checked' : ''}`}
-        contentEditable
-        suppressContentEditableWarning
-        ref={`task-text${taskId}`}
-        onBlur={({ target: { textContent } }) => {
-          dispatch(UPDATE_TASK({ card, taskId, textContent }))
-          this.refs[`task-text${taskId}`].classList.remove('selected')
-        }}
-        onKeyDown={e => {
-          if (e.keyCode === 13) {
-            e.preventDefault()
-            this.refs[`task-text${taskId}`].blur()
-            dispatch(ADD_TASK({ card }))
-          }
-        }}
-        onFocus={() => {
-          this.refs[`task-text${taskId}`].classList.add('selected')
-        }}>
-        {text}
-      </p>
-    )
-  }
+  return (
+    <p
+      className={`card-task-text ${checked ? 'checked' : ''} ${focused ? 'selected' : ''}`}
+      contentEditable
+      suppressContentEditableWarning
+      ref={taskRef}
+      onBlur={({ target: { textContent } }) => {
+        updateTask({ cardId: card.cardId, taskId, text: textContent })
+        setFocused(false)
+      }}
+      onKeyDown={e => {
+        if (e.keyCode === 13) {
+          e.preventDefault()
+          taskRef.current.blur()
+          addTask({ cardId: card.cardId })
+        }
+      }}
+      onFocus={() => setFocused(true)}
+    >
+      {text}
+    </p>
+  )
 }

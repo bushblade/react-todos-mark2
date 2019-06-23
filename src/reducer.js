@@ -1,8 +1,8 @@
+import uuid from 'uuid'
 import {
   DELETE_CARD,
   CHECK_TASK,
   DELETE_TASK,
-  DELETE_CARD,
   UPDATE_TASK,
   ADD_TASK,
   UPDATE_TITLE,
@@ -11,10 +11,12 @@ import {
 } from './types'
 
 export default (state, { type, payload }) => {
+  console.log(type, payload)
   switch (type) {
     // delete card
     case DELETE_CARD:
       return state.filter(card => card.cardId !== payload.id)
+
     // toggle check a task
     case CHECK_TASK:
       return state.map(card => {
@@ -29,21 +31,20 @@ export default (state, { type, payload }) => {
           return card
         }
       })
+
     // delete a task
     case DELETE_TASK:
       return state.map(card => {
         if (card.cardId === payload.cardId) {
           return {
             ...card,
-            tasks: card.tasks.filter(t => t !== payload.taskId)
+            tasks: card.tasks.filter(t => t.taskId !== payload.taskId)
           }
         } else {
           return card
         }
       })
-    // delete card
-    case DELETE_CARD:
-      return state.filter(card => card.cardId !== payload.cardId)
+
     // update a task
     case UPDATE_TASK:
       return state.map(card => {
@@ -58,18 +59,27 @@ export default (state, { type, payload }) => {
           return card
         }
       })
+
     // add a task to a card
     case ADD_TASK:
       return state.map(card => {
         if (card.cardId === payload.cardId) {
           return {
             ...card,
-            tasks: [...card.tasks, payload.newTask]
+            tasks: [
+              ...card.tasks,
+              {
+                taskId: uuid(),
+                text: '',
+                checked: false
+              }
+            ]
           }
         } else {
           return card
         }
       })
+
     // update title
     case UPDATE_TITLE:
       return state.map(card => {
@@ -78,8 +88,11 @@ export default (state, { type, payload }) => {
             ...card,
             title: payload.newTitle
           }
+        } else {
+          return card
         }
       })
+
     // change the card color
     case CHANGE_COLOR:
       return state.map(card => {
@@ -88,10 +101,23 @@ export default (state, { type, payload }) => {
             ...card,
             color: payload.newColor
           }
+        } else {
+          return card
         }
       })
+
     // add a new card
     case ADD_CARD:
-      return [...state, payload.newCard]
+      return [
+        ...state,
+        {
+          cardId: uuid(),
+          title: '',
+          color: 'WhiteSmoke',
+          tasks: []
+        }
+      ]
+    default:
+      return state
   }
 }
