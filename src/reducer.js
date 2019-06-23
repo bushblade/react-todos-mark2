@@ -21,13 +21,7 @@ const cardReducer = (state, cardId) => func => {
 }
 
 const taskReducer = (state, cardId) => func => {
-  return state.map(card => {
-    if (card.cardId === cardId) {
-      return { ...card, tasks: func(card.tasks) }
-    } else {
-      return card
-    }
-  })
+  return cardReducer(state, cardId)(card => ({ ...card, tasks: func(card.tasks) }))
 }
 
 export default (state, { type, payload }) => {
