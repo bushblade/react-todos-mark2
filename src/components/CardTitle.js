@@ -4,7 +4,7 @@ import { Context } from '../context'
 export default ({ card }) => {
   const titleRef = useRef(card.cardId)
   const [selected, setSelected] = useState(false)
-  const { updateTitle } = useContext(Context)
+  const { updateTitle, addTask } = useContext(Context)
 
   useEffect(() => {
     if (card.title.length === 0) {
@@ -29,6 +29,9 @@ export default ({ card }) => {
         if (e.keyCode === 13) {
           e.preventDefault()
           titleRef.current.blur()
+          if (card.tasks.length === 0) {
+            addTask({ cardId: card.cardId })
+          }
         }
       }}
     >

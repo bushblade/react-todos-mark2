@@ -9,6 +9,7 @@ export default ({ taskId, text, checked, card }) => {
   useEffect(() => {
     if (text.length === 0) {
       setFocused(true)
+      taskRef.current.focus()
     }
   }, [])
 

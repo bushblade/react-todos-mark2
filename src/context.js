@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer, createContext } from 'react'
 import reducer from './reducer'
+import defaultCards from './defaultCards'
 
 import {
   DELETE_CARD,
@@ -19,7 +20,7 @@ const CardProvider = ({ children }) => {
     if (localStorage.getItem('cards') !== null) {
       return JSON.parse(localStorage.getItem('cards'))
     } else {
-      return []
+      return defaultCards
     }
   }
 
