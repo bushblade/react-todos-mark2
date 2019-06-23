@@ -1,33 +1,28 @@
-import React, { Component } from 'react'
-import contextActions from './contextActions'
-import defaultCards from './defaultCards'
+import React, { useEffect, useReducer, createContext } from 'react'
+import contextActions from './actions'
+import reducer from './reducer'
 
-const { Provider, Consumer } = React.createContext()
+export const Context = createContext()
 
-class CardProvider extends Component {
-  state = {
-    cards: [],
-    dispatch: action => this.setState(action)
-  }
+const CardProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, [])
 
-  componentDidMount() {
-    if (localStorage.getItem('cards') !== null) {
-      let fromStorage = JSON.parse(localStorage.getItem('cards'))
-      fromStorage.cards.length > 0 ? this.setState(fromStorage) : this.setState(defaultCards)
-    } else {
-      this.setState(defaultCards)
-    }
-  }
+  // useEffect(() => {
+  //   if (localStorage.getItem('cards') !== null) {
+  //     let fromStorage = JSON.parse(localStorage.getItem('cards'))
+  //     fromStorage.cards.length > 0 ? this.setState(fromStorage) : this.setState(defaultCards)
+  //   } else {
+  //     this.setState(defaultCards)
+  //   }
+  // }, [])
 
-  componentDidUpdate() {
-    if (localStorage.getItem('cards') !== undefined) {
-      localStorage.setItem('cards', JSON.stringify({ cards: this.state.cards }))
-    }
-  }
+  // componentDidUpdate() {
+  //   if (localStorage.getItem('cards') !== undefined) {
+  //     localStorage.setItem('cards', JSON.stringify({ cards: this.state.cards }))
+  //   }
+  // }
 
-  render() {
-    return <Provider value={{ ...this.state, ...contextActions }}>{this.props.children}</Provider>
-  }
+  return <Context.Provider value={{ cards: state, dispatch }}>{props.children}</Context.Provider>
 }
 
-export { CardProvider, Consumer }
+export default CardProvider
