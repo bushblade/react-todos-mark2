@@ -10,6 +10,16 @@ import {
   ADD_CARD
 } from './types'
 
+const cardReducer = (state, cardId) => func => {
+  return state.map(card => {
+    if (card.cardId === cardId) {
+      return func(card)
+    } else {
+      return card
+    }
+  })
+}
+
 const taskReducer = (state, cardId) => func => {
   return state.map(card => {
     if (card.cardId === cardId) {
@@ -22,6 +32,8 @@ const taskReducer = (state, cardId) => func => {
 
 export default (state, { type, payload }) => {
   const taskOp = taskReducer(state, payload.cardId)
+  const cardOp = cardReducer(state, payload.cardId)
+
   switch (type) {
     // delete card
     case DELETE_CARD:
@@ -56,29 +68,11 @@ export default (state, { type, payload }) => {
 
     // update title
     case UPDATE_TITLE:
-      return state.map(card => {
-        if (card.cardId === payload.cardId) {
-          return {
-            ...card,
-            title: payload.newTitle
-          }
-        } else {
-          return card
-        }
-      })
+      return cardOp(card => ({ ...card, title: payload.newTitle }))
 
     // change the card color
     case CHANGE_COLOR:
-      return state.map(card => {
-        if (card.cardId === payload.cardId) {
-          return {
-            ...card,
-            color: payload.newColor
-          }
-        } else {
-          return card
-        }
-      })
+      return cardOp(card => ({ ...card, color: payload.newColor }))
 
     // add a new card
     case ADD_CARD:
