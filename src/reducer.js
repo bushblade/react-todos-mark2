@@ -10,7 +10,18 @@ import {
   ADD_CARD
 } from './types'
 
+const taskReducer = (state, cardId) => func => {
+  return state.map(card => {
+    if (card.cardId === cardId) {
+      return { ...card, tasks: func(card.tasks) }
+    } else {
+      return card
+    }
+  })
+}
+
 export default (state, { type, payload }) => {
+  const taskOp = taskReducer(state, payload.cardId)
   switch (type) {
     // delete card
     case DELETE_CARD:
@@ -18,66 +29,30 @@ export default (state, { type, payload }) => {
 
     // toggle check a task
     case CHECK_TASK:
-      return state.map(card => {
-        if (card.id === payload.cardId) {
-          return {
-            ...card,
-            tasks: card.tasks.map(t =>
-              t.taskId === payload.taskId ? { ...t, checked: !t.checked } : t
-            )
-          }
-        } else {
-          return card
-        }
-      })
+      return taskOp(tasks =>
+        tasks.map(t => (t.taskId === payload.taskId ? { ...t, checked: !t.checked } : t))
+      )
 
     // delete a task
     case DELETE_TASK:
-      return state.map(card => {
-        if (card.cardId === payload.cardId) {
-          return {
-            ...card,
-            tasks: card.tasks.filter(t => t.taskId !== payload.taskId)
-          }
-        } else {
-          return card
-        }
-      })
+      return taskOp(tasks => tasks.filter(t => t.taskId !== payload.taskId))
 
     // update a task
     case UPDATE_TASK:
-      return state.map(card => {
-        if (card.cardId === payload.cardId) {
-          return {
-            ...card,
-            tasks: card.tasks.map(t =>
-              payload.taskId === t.taskId ? { ...t, text: payload.text } : t
-            )
-          }
-        } else {
-          return card
-        }
-      })
+      return taskOp(tasks =>
+        tasks.map(t => (payload.taskId === t.taskId ? { ...t, text: payload.text } : t))
+      )
 
     // add a task to a card
     case ADD_TASK:
-      return state.map(card => {
-        if (card.cardId === payload.cardId) {
-          return {
-            ...card,
-            tasks: [
-              ...card.tasks,
-              {
-                taskId: uuid(),
-                text: '',
-                checked: false
-              }
-            ]
-          }
-        } else {
-          return card
+      return taskOp(tasks => [
+        ...tasks,
+        {
+          taskId: uuid(),
+          text: '',
+          checked: false
         }
-      })
+      ])
 
     // update title
     case UPDATE_TITLE:
