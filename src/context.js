@@ -1,4 +1,4 @@
-import React, { useReducer, createContext } from 'react'
+import React, { useEffect, useReducer, createContext } from 'react'
 import reducer from './reducer'
 
 import {
@@ -15,7 +15,15 @@ import {
 export const Context = createContext()
 
 const CardProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(reducer, [])
+  const getFromLS = () => {
+    if (localStorage.getItem('cards') !== null) {
+      return JSON.parse(localStorage.getItem('cards'))
+    } else {
+      return []
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, getFromLS())
 
   const [
     deleteCard,
@@ -37,20 +45,11 @@ const CardProvider = ({ children }) => {
     ADD_CARD
   ].map(type => payload => dispatch({ type, payload }))
 
-  // useEffect(() => {
-  //   if (localStorage.getItem('cards') !== null) {
-  //     let fromStorage = JSON.parse(localStorage.getItem('cards'))
-  //     fromStorage.cards.length > 0 ? this.setState(fromStorage) : this.setState(defaultCards)
-  //   } else {
-  //     this.setState(defaultCards)
-  //   }
-  // }, [])
-
-  // componentDidUpdate() {
-  //   if (localStorage.getItem('cards') !== undefined) {
-  //     localStorage.setItem('cards', JSON.stringify({ cards: this.state.cards }))
-  //   }
-  // }
+  useEffect(() => {
+    if (localStorage.getItem('cards') !== undefined) {
+      localStorage.setItem('cards', JSON.stringify(state))
+    }
+  }, [state])
 
   return (
     <Context.Provider

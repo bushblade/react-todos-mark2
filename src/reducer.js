@@ -11,7 +11,6 @@ import {
 } from './types'
 
 export default (state, { type, payload }) => {
-  console.log(type, payload)
   switch (type) {
     // delete card
     case DELETE_CARD:
