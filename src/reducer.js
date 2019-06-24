@@ -10,6 +10,7 @@ import {
   ADD_CARD
 } from './types'
 
+// HOF to operate just on the catrd
 const cardReducer = (state, cardId) => func => {
   return state.map(card => {
     if (card.cardId === cardId) {
@@ -20,10 +21,12 @@ const cardReducer = (state, cardId) => func => {
   })
 }
 
+// HOP to operate just on the card's tasks
 const taskReducer = (state, cardId) => func => {
   return cardReducer(state, cardId)(card => ({ ...card, tasks: func(card.tasks) }))
 }
 
+// reducer
 export default (state, { type, payload }) => {
   const taskOp = taskReducer(state, payload.cardId)
   const cardOp = cardReducer(state, payload.cardId)
