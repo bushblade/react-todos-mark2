@@ -17,7 +17,7 @@ export const Context = createContext()
 
 const CardProvider = ({ children }) => {
   const getFromLS = () => {
-    if (localStorage.getItem('cards') !== null) {
+    if (localStorage.getItem('todocards') !== null) {
       return JSON.parse(localStorage.getItem('cards'))
     } else {
       return defaultCards
@@ -47,8 +47,8 @@ const CardProvider = ({ children }) => {
   ].map(type => payload => dispatch({ type, payload }))
 
   useEffect(() => {
-    if (localStorage.getItem('cards') !== undefined) {
-      localStorage.setItem('cards', JSON.stringify(state))
+    if (localStorage.getItem('todocards') !== undefined) {
+      localStorage.setItem('todocards', JSON.stringify(state))
     }
   }, [state])
 
