@@ -13,15 +13,34 @@ const calcColumns = () => {
   }
 }
 
-const useColumns = () => {
-  const [columns, setColumns] = useState(calcColumns())
+const columnChunker = (columns, cards) => {
+  let currentColumn = 0
+  const chunkArr = [
+    ...Array(columns)
+      .fill(0)
+      .map(() => [])
+  ]
+  cards.forEach(card => {
+    if (chunkArr[currentColumn]) {
+      chunkArr[currentColumn].push(card)
+      currentColumn++
+    } else {
+      currentColumn = 0
+      chunkArr[currentColumn].push(card)
+    }
+  })
+  return chunkArr
+}
+
+const useColumns = cards => {
+  const [chunkedColumns, setChunkedColumns] = useState(columnChunker(calcColumns(), cards))
 
   useEffect(() => {
-    const resizeEvent = e => setColumns(calcColumns())
+    const resizeEvent = e => setChunkedColumns(columnChunker(calcColumns(), cards))
     window.addEventListener('resize', resizeEvent)
     return () => window.removeEventListener(resizeEvent)
   }, [])
-  return columns
+  return chunkedColumns
 }
 
 export default useColumns
