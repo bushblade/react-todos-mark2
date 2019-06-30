@@ -18,7 +18,7 @@ export const Context = createContext()
 const CardProvider = ({ children }) => {
   const getFromLS = () => {
     if (localStorage.getItem('todocards') !== null) {
-      return JSON.parse(localStorage.getItem('cards'))
+      return JSON.parse(localStorage.getItem('todocards'))
     } else {
       return defaultCards
     }
