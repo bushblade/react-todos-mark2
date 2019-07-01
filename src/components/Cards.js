@@ -22,7 +22,7 @@ const smallestColumn = columns => {
   const columnSizes = columns.map(column =>
     column.reduce((acc, card) => {
       if (card.tasks.length > 0) {
-        return (acc += card.tasks.length)
+        return (acc += card.tasks.length + 2)
       } else {
         return (acc += 2)
       }
