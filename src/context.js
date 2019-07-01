@@ -22,6 +22,7 @@ const CardProvider = ({ children }) => {
       localStorage.removeItem(s)
     }
   })
+
   const getFromLS = () => {
     if (localStorage.getItem('react-todo-cards') !== null) {
       return JSON.parse(localStorage.getItem('react-todo-cards'))

@@ -1,17 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Context } from '../context'
+import { colors } from '../defaultCards'
 
 export default ({ card }) => {
   const { changeColor } = useContext(Context)
   const [showMenu, setMenu] = useState(false)
-  const colors = [
-    'Thistle',
-    'PaleTurquoise',
-    'LemonChiffon',
-    'NavajoWhite',
-    'WhiteSmoke',
-    'LightGreen'
-  ]
 
   const toggleMenu = () => setMenu(!showMenu)
 

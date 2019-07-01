@@ -1,27 +1,30 @@
 import uuid from 'uuid'
 import faker from 'faker'
 
-const colors = [
+export const colors = [
   'Thistle',
+  'Plum',
   'PaleTurquoise',
+  'SkyBlue',
   'LemonChiffon',
   'NavajoWhite',
   'WhiteSmoke',
-  'LightGreen'
+  'LightGreen',
+  'Burlywood'
 ]
 
 const randomTask = () => ({
   taskId: uuid(),
   text: faker.company.bs(),
-  checked: Math.random() > 0.6 ? true : false
+  checked: Math.random() > 0.7 ? true : false
 })
 
 const randomCard = () => ({
   cardId: uuid(),
-  title: faker.company.bs(),
+  title: faker.company.catchPhrase(),
   color: colors[Math.round(Math.random() * colors.length)],
   tasks: [
-    ...Array(Math.round(Math.random() * 6))
+    ...Array(Math.round(1 + Math.random() * 6))
       .fill(0)
       .map(randomTask)
   ]
@@ -85,7 +88,7 @@ export default [
   {
     cardId: uuid(),
     title: 'Click the button in the bottom right to add a to do card',
-    color: 'LemonChiffon',
+    color: 'LightGreen',
     tasks: [
       {
         taskId: uuid(),
