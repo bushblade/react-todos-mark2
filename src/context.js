@@ -16,6 +16,12 @@ import {
 export const Context = createContext()
 
 const CardProvider = ({ children }) => {
+  // clean up from old cards
+  ;['cards', 'todocards'].forEach(s => {
+    if (localStorage.getItem(s) !== null) {
+      localStorage.removeItem(s)
+    }
+  })
   const getFromLS = () => {
     if (localStorage.getItem('react-todo-cards') !== null) {
       return JSON.parse(localStorage.getItem('react-todo-cards'))
