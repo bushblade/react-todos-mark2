@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import { Context } from '../context'
 import Card from './Card'
 import AddCard from './AddCard'
@@ -17,7 +17,6 @@ const calcColumns = () => {
   }
 }
 
-// this is buggy, addin too many to column 0
 const columnChunker = (columns, cards) => {
   let currentColumn = 0
   const chunkArr = [
@@ -28,24 +27,31 @@ const columnChunker = (columns, cards) => {
   cards.forEach(card => {
     if (chunkArr[currentColumn]) {
       chunkArr[currentColumn].push(card)
-      console.log(currentColumn)
       currentColumn++
     } else {
-      currentColumn = 0
-      chunkArr[currentColumn].push(card)
+      currentColumn = 1
+      chunkArr[0].push(card)
     }
   })
-  console.log(chunkArr)
   return chunkArr
 }
 
 const Cards = () => {
   const { state: cards } = useContext(Context)
   // const cardsInColumns = useColumns(cards)
+
+  const [cardsInColumns, setCardsInColumns] = useState(columnChunker(calcColumns(), cards))
+
+  useEffect(() => {
+    const resizeEvent = e => setCardsInColumns(columnChunker(calcColumns(), cards))
+    window.addEventListener('resize', resizeEvent)
+    return () => window.removeEventListener(resizeEvent)
+  }, [])
+
   return (
     <>
       {cards &&
-        columnChunker(calcColumns(), cards).map((column, index) => (
+        cardsInColumns.map((column, index) => (
           <div className="column" key={`column${index}`}>
             {column.map(card => (
               <Card card={card} key={`card${card.cardId}`} />
