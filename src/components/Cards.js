@@ -17,21 +17,29 @@ const calcColumns = () => {
   }
 }
 
+// need column index
+const smallestColumn = columns => {
+  const columnSizes = columns.map(column =>
+    column.reduce((acc, card) => {
+      if (card.tasks.length > 0) {
+        return (acc += card.tasks.length)
+      } else {
+        return (acc += 2)
+      }
+    }, 0)
+  )
+  return columnSizes.indexOf(Math.min(...columnSizes))
+}
+
+// need to add new card to smallest column
 const columnChunker = (columns, cards) => {
-  let currentColumn = 0
   const chunkArr = [
     ...Array(columns)
       .fill(0)
       .map(() => [])
   ]
   cards.forEach(card => {
-    if (chunkArr[currentColumn]) {
-      chunkArr[currentColumn].push(card)
-      currentColumn++
-    } else {
-      currentColumn = 1
-      chunkArr[0].push(card)
-    }
+    chunkArr[smallestColumn(chunkArr)].push(card)
   })
   return chunkArr
 }
@@ -40,18 +48,18 @@ const Cards = () => {
   const { state: cards } = useContext(Context)
   // const cardsInColumns = useColumns(cards)
 
-  const [cardsInColumns, setCardsInColumns] = useState(columnChunker(calcColumns(), cards))
+  const [columns, setColumns] = useState(calcColumns())
 
   useEffect(() => {
-    const resizeEvent = e => setCardsInColumns(columnChunker(calcColumns(), cards))
+    const resizeEvent = e => setColumns(calcColumns())
     window.addEventListener('resize', resizeEvent)
-    return () => window.removeEventListener(resizeEvent)
+    return () => window.removeEventListener('resize', resizeEvent)
   }, [])
 
   return (
     <>
       {cards &&
-        cardsInColumns.map((column, index) => (
+        columnChunker(columns, cards).map((column, index) => (
           <div className="column" key={`column${index}`}>
             {column.map(card => (
               <Card card={card} key={`card${card.cardId}`} />
