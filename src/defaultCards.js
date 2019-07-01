@@ -1,4 +1,31 @@
 import uuid from 'uuid'
+import faker from 'faker'
+
+const colors = [
+  'Thistle',
+  'PaleTurquoise',
+  'LemonChiffon',
+  'NavajoWhite',
+  'WhiteSmoke',
+  'LightGreen'
+]
+
+const randomTask = () => ({
+  taskId: uuid(),
+  text: faker.company.bs(),
+  checked: Math.random() > 0.6 ? true : false
+})
+
+const randomCard = () => ({
+  cardId: uuid(),
+  title: faker.company.bs(),
+  color: colors[Math.round(Math.random() * colors.length)],
+  tasks: [
+    ...Array(Math.round(Math.random() * 6))
+      .fill(0)
+      .map(randomTask)
+  ]
+})
 
 export default [
   {
@@ -66,5 +93,8 @@ export default [
         checked: false
       }
     ]
-  }
+  },
+  ...Array(10)
+    .fill(0)
+    .map(randomCard)
 ]
