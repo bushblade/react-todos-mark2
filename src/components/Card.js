@@ -6,7 +6,7 @@ import AddTask from './AddTask'
 
 const Card = ({ card }) => {
   return (
-    <div className="column">
+    <div className="card-wrapper">
       <div className="card" style={{ backgroundColor: card.color }}>
         <CardHeader card={card} />
         <div className="card-body">

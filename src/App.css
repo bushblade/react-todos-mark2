@@ -26,7 +26,8 @@ body {
 .column {
   width: 100%;
   margin: 0;
-  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 768px) {
@@ -73,6 +74,10 @@ body {
 
 .icon:hover {
   background: rgba(0, 0, 0, 0.2);
+}
+
+.card-wrapper {
+  padding: 0.75rem;
 }
 
 .card {
