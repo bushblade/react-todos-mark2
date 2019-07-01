@@ -17,8 +17,8 @@ export const Context = createContext()
 
 const CardProvider = ({ children }) => {
   const getFromLS = () => {
-    if (localStorage.getItem('todocards') !== null) {
-      return JSON.parse(localStorage.getItem('todocards'))
+    if (localStorage.getItem('react-todo-cards') !== null) {
+      return JSON.parse(localStorage.getItem('react-todo-cards'))
     } else {
       return defaultCards
     }
@@ -47,8 +47,8 @@ const CardProvider = ({ children }) => {
   ].map(type => payload => dispatch({ type, payload }))
 
   useEffect(() => {
-    if (localStorage.getItem('todocards') !== undefined) {
-      localStorage.setItem('todocards', JSON.stringify(state))
+    if (localStorage.getItem('react-todo-cards') !== undefined) {
+      localStorage.setItem('react-todo-cards', JSON.stringify(state))
     }
   }, [state])
 
